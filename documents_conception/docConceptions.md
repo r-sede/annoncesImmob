@@ -20,4 +20,5 @@ authentification:
 ### diagramme de sequence 
 
 * delete user
-![diagramme sequence](./sequence _delete_user.jpg)
+
+![diagramme sequence](./sequence_delete_user.jpg)
