@@ -28,7 +28,7 @@
 
 ### diagrame d'etat
 
-![diagramme d'etats](./etatsAnnImmob2.jpeg.jpeg)
+![diagramme d'etats](./etatsAnnImmob2.jpeg)
 
 authentification:
 
