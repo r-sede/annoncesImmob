@@ -32,7 +32,7 @@
 
 authentification:
 
-![diagramme d'etats auth](./etatsAnnImmob_Auth.jpeg)
+![diagramme d'etats auth](./etatAnnonceImmob_Auth.jpeg)
 
 ### diagramme de sequence 
 
