@@ -1,0 +1,15 @@
+title delete user
+
+
+
+
+Admin->Routeur:http req. Delete /user/{id}
+activate UserController
+Routeur->UserController:destroy(User user)
+participant UserController
+participant UserModel
+participant AnnonceModel 
+UserController->UserModel:delete user
+UserController->AnnonceModel:delete Annonce from this user
+
+Admin<-UserController:http status 200
