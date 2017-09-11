@@ -1,6 +1,6 @@
 ## Documents de conception
 
----
+___
 
 ### user stories
 
@@ -19,12 +19,17 @@
 * gerer les utilisateurs (desactiver) 
 * gerer les annonces (desactiver) 
 
+---
 
 ### use case
 ![use case](./useCaseAnnonceImmob.jpeg)
 
+---
+
 ### entité association
 ![entité asssociation](./entiteRelationImmob.jpg)
+
+---
 
 ### diagrame d'etat
 
@@ -33,6 +38,8 @@
 authentification:
 
 ![diagramme d'etats auth](./etatAnnonceImmob_Auth.jpeg)
+
+---
 
 ### diagramme de sequence 
 
