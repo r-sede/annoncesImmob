@@ -17,7 +17,7 @@ class CreateLogementsTable extends Migration
             $table->increments('id');
             $table->integer('n_rue');
             $table->string('rue');
-            $table->integer('code_postal');
+            $table->string('code_postal');
             $table->string('ville');
             $table->integer('superficie');
             $table->integer('fk_type_logements');

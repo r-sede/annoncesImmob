@@ -14,7 +14,7 @@ class AnnonceController extends Controller
      */
     public function index()
     {
-        return response( Annonce::All()->orderBy('created_at'), 200);
+        return response()->json( Annonce::All(), 200);
     }
 
     /**
