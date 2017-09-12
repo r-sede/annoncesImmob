@@ -15,7 +15,7 @@ class CreateModaliteAccesTable extends Migration
     {
         Schema::create('modalite_acces', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->string('name');
         });
     }
 
