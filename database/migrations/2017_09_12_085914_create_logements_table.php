@@ -15,7 +15,22 @@ class CreateLogementsTable extends Migration
     {
         Schema::create('logements', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->integer('n_rue');
+            $table->string('rue');
+            $table->integer('code_postal');
+            $table->string('ville');
+            $table->integer('superficie');
+            $table->integer('fk_type_logements');
+            $table->boolean('meuble');
+            $table->float('tarif');
+            $table->integer('fk_modalite');
+            $table->integer('etage')->nullable();
+            $table->integer('fk_type_parking')->nullable();
+            $table->integer('n_chambre');
+            $table->string('description');
+            $table->string('photo')->default('default.jpg');
+            $table->char('classe_energie');
+            $table->char('classe_gesc');
         });
     }
 

@@ -15,6 +15,10 @@ class CreateAnnoncesTable extends Migration
     {
         Schema::create('annonces', function (Blueprint $table) {
             $table->increments('id');
+            $table->timestamp('expire_at');
+            $table->integer('fk_auteur');
+            $table->integer('fk_logement');
+            $table->boolean('actif')->default(true);
             $table->timestamps();
         });
     }
