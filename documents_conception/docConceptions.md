@@ -47,6 +47,8 @@ authentification:
 
 ![diagramme sequence](./sequence_delete_user.jpg)
 
+---
+
 ### mockup zoning:
 
 * consulter annonces
