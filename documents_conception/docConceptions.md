@@ -46,3 +46,9 @@ authentification:
 * delete user
 
 ![diagramme sequence](./sequence_delete_user.jpg)
+
+### mockup zoning:
+
+* consulter annonces
+
+![mockup annonces](./mockupAnnoceImmob.jpg)
