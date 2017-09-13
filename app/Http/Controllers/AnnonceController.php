@@ -25,7 +25,12 @@ class AnnonceController extends Controller
 
 	public function index()
 	{
-		return response()->json( Annonce::All(), 200);
+		
+		
+
+		$res = Annonce::All();
+		/*return response()->json( Annonce::All(), 200);*/
+		return view('all', [ 'annonces' => $res ]);
 	}
 
 	/**
@@ -78,6 +83,11 @@ class AnnonceController extends Controller
 		$annonce = new Annonce();
 		$annonce->fk_auteur = Auth::id();
 		$annonce->fk_logement = $idLogement;
+
+		$nn = time() + 8 * 24 * 3600;
+        $today = new \DateTime();
+        $today->setTimestamp($nn);
+        $annonce->expire_at = $today->format('Y-m-d H:i:s');
 		$annonce->save();
 		return redirect('/');
 

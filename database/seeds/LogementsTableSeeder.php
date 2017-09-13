@@ -25,7 +25,7 @@ class LogementsTableSeeder extends Seeder
         		'superficie' => $faker->numberBetween($min=10, $max=300),
         		'fk_type_logements' => $faker->numberBetween($min=0, $max=9),
         		'meuble' => $faker->boolean,
-        		'tarif' => $faker->numberBetween($min=400, $max=1000000),
+        		'tarif' => $faker->numberBetween($min=400, $max=10000),
         		'fk_modalite' => $faker->numberBetween($min=0, $max=2),
         		'etage' => $faker->numberBetween($min=0, $max=10),
         		'fk_type_parking' => $faker->numberBetween($min=0, $max=2),

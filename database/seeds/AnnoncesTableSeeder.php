@@ -22,8 +22,8 @@ class AnnoncesTableSeeder extends Seeder
         for ($i = 0; $i < $limit; $i++) {
         	Annonce::create([
         		'expire_at' => $today->format('Y-m-d H:i:s'), 
-        		'fk_auteur' => $faker->numberBetween($min = 0, $max = 19 ),
-        		'fk_logement' => $faker->numberBetween($min = 0, $max = 19 ),
+        		'fk_auteur' => $faker->numberBetween($min = 1, $max = 20 ),
+        		'fk_logement' => $faker->numberBetween($min = 1, $max = 20 ),
         	]);
 
 
