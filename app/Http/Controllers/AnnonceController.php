@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Annonce;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AnnonceController extends Controller
 {
@@ -12,6 +13,12 @@ class AnnonceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct() {
+           
+            $this->middleware('auth', ['except' => ['index','show']]);
+    }
+
     public function index()
     {
         return response()->json( Annonce::All(), 200);
@@ -24,7 +31,15 @@ class AnnonceController extends Controller
      */
     public function create()
     {
-        //
+        $type_parking = DB::table('type_parking')->get();
+        $type_logement = DB::table('type_logement')->get();
+        $modalite_acces = DB::table('modalite_acces')->get();
+
+        return view('createAnnonceForm', [
+            'types_parking' => $type_parking,
+            'types_logement' => $type_logement,
+            'modalites_acces' => $modalite_acces,
+        ]); 
     }
 
     /**
@@ -35,7 +50,7 @@ class AnnonceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -46,6 +61,7 @@ class AnnonceController extends Controller
      */
     public function show(Annonce $annonce)
     {
+        return response($annonce, 200);
         //
     }
 
@@ -57,7 +73,6 @@ class AnnonceController extends Controller
      */
     public function edit(Annonce $annonce)
     {
-        //
     }
 
     /**

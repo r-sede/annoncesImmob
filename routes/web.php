@@ -12,9 +12,14 @@
 */
 
 Route::get('/', function () {
-    return view('createAnnonceForm');
+    return view('index');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('annonces', 'AnnonceController');
+
+
+Route::resource('messages', 'MessageController');
