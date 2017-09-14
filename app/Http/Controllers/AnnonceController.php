@@ -18,6 +18,9 @@ class AnnonceController extends Controller
 	}
 
 
+
+
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -30,7 +33,7 @@ class AnnonceController extends Controller
 	
 		$res = Annonce::orderBy('created_at', 'desc')->get();
 		/*return response()->json( Annonce::All(), 200);*/
-		return view('all', [ 'annonces' => $res ]);
+		return view('index', [ 'annonces' => $res ]);
 	}
 
 	/**
@@ -121,6 +124,21 @@ class AnnonceController extends Controller
 	 */
 	public function edit(Annonce $annonce)
 	{
+		if($annonce->auteur['id'] != Auth::id()) {
+			return redirect('/');
+		}
+		$annonce->logement;
+
+		$type_parking = DB::table('type_parking')->get();
+		$type_logement = DB::table('type_logement')->get();
+		$modalite_acces = DB::table('modalite_acces')->get();
+
+		return view('editAnnonce', [
+			'annonce' => $annonce,
+			'types_parking' => $type_parking,
+			'types_logement' => $type_logement,
+			'modalites_acces' => $modalite_acces,
+		]); 
 	}
 
 	/**
@@ -143,6 +161,11 @@ class AnnonceController extends Controller
 	 */
 	public function destroy(Annonce $annonce)
 	{
-		//
+
+	}
+
+
+	public function mesAnnonces() {
+		return Auth::user()->mesAnnonces();
 	}
 }

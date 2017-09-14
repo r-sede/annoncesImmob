@@ -46,6 +46,8 @@
 							<li><a href="{{ route('login') }}">Connexion</a></li>
 							<li><a href="{{ route('register') }}">S'inscrire</a></li>
 						@else
+						<li><a href="{{ route('mesAnnonces') }}">Mes Annonces</a></li>
+						<li><a href="{{ route('annonces.create') }}">Nouvelle Annonce</a></li>
 						<a href="{{ route('mesMessages') }}" class="btn btn-default navbar-btn">Messages&nbsp;<span class="badge">{{ Auth::user()->getNewMessage() }}</span></a>
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -63,8 +65,6 @@
 										<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
 											{{ csrf_field() }}
 										</form>
-											<li><a href="{{ route('login') }}">Mes Annonces</a></li>
-											<li><a href="{{ route('annonces.create') }}">Nouvelle Annonce</a></li>
 									</li>
 								</ul>
 							</li>

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-	<form method="POST" action="/annonces" enctype="multipart/form-data">
+	<form method="PUT" action="{{ route('annonces.update',$annonce) }}" >
 		
 		<div class="row">
 			<div class="col-xs-3">
@@ -10,19 +10,27 @@
 				<label>Adresse: </label>
 				<div class="form-group">
 					<label for="n_rue">n° rue</label>
-					<input required name="n_rue" type="text" class="form-control" id="n_rue" placeholder="n° rue">
+					<input required name="n_rue" type="text" class="form-control" id="n_rue" placeholder="n° rue" 
+						value="{{ $annonce->logement->n_rue }}"
+					>
 				</div>
 				<div class="form-group">
 					<label for="rue">rue</label>
-					<input required name="rue" type="text" class="form-control" id="rue" placeholder="rue des gambas">
+					<input required name="rue" type="text" class="form-control" id="rue" placeholder="rue des gambas"
+						value="{{ $annonce->logement->rue }}"
+					>
 				</div>
 				<div class="form-group">
 					<label for="code_postal">code_postal</label>
-					<input required name="code_postal" type="text" class="form-control" id="code_postal" placeholder="32000">
+					<input required name="code_postal" type="text" class="form-control" id="code_postal" placeholder="32000"
+						value="{{ $annonce->logement->code_postal }}"
+					>
 				</div>
 				<div class="form-group">
 					<label for="ville">ville</label>
-					<input required name="ville" type="text" class="form-control" id="ville" placeholder="Auch">
+					<input required name="ville" type="text" class="form-control" id="ville" placeholder="Auch"
+						value="{{ $annonce->logement->ville }}"
+					>
 				</div>
 			</div>
 			<div class="col-xs-3">
@@ -30,22 +38,30 @@
 
 				<div class="form-group">
 					<label for="etage">etage</label>
-					<input name="etage" type="text" class="form-control" id="etage" placeholder="">
+					<input name="etage" type="text" class="form-control" id="etage" placeholder=""
+						value="{{ $annonce->logement->etage }}"
+					>
 				</div>
 
 				<div class="form-group">
 					<label for="tarif">tarif €</label>
-					<input required name="tarif" type="text" class="form-control" id="tarif" placeholder="300">
+					<input required name="tarif" type="text" class="form-control" id="tarif" placeholder="300"
+						value="{{ $annonce->logement->tarif }}"
+					>
 				</div>
 
 				<div class="form-group">
 					<label for="superficie">superficie m²</label>
-					<input required name="superficie" type="text" class="form-control" id="superficie" placeholder="30">
+					<input required name="superficie" type="text" class="form-control" id="superficie" placeholder="30"
+						value="{{ $annonce->logement->superficie }}"
+					>
 				</div>
 
 				<div class="form-group">
 					<label for="n_chambre">nombres de chambre</label>
-					<input required name="n_chambre" type="text" class="form-control" id="n_chambre" placeholder="">
+					<input required name="n_chambre" type="text" class="form-control" id="n_chambre" placeholder=""
+						value="{{ $annonce->logement->n_chambre }}"
+					>
 				</div>
 
 
@@ -57,7 +73,11 @@
 				<label>detail du logement 2</label>
 				<div class="checkbox">
 					<label>
-						<input type="checkbox" name="meuble" id="meuble"> Meublé
+						@if($annonce->logement->meuble)
+							<input type="checkbox" name="meuble" id="meuble" checked > Meublé
+						@else
+							<input type="checkbox" name="meuble" id="meuble"> Meublé
+						@endif
 					</label>
 				</div>
 
@@ -65,7 +85,12 @@
 					<label for="modalite_acces">modalite_acces</label>
 					<select required name="modalite_acces" id="modalite_acces">
 						@foreach ($modalites_acces as $modalite_acces)
-						<option value="{{$modalite_acces->id}}">{{ $modalite_acces->name }}</option>
+							@if($modalite_acces->id === $annonce->fk_modalite)
+								<option value="{{$modalite_acces->id}}" selected>{{ $modalite_acces->name }}</option>
+							@else
+								<option value="{{$modalite_acces->id}}" >{{ $modalite_acces->name }}</option>
+							@endif
+
 						@endforeach
 					</select>
 					<!-- <p class="help-block">Example block-level help text here.</p> -->
@@ -76,7 +101,11 @@
 					<label for="type_logement">type_logement</label>
 					<select required name="type_logement" id="type_logement">
 						@foreach ($types_logement as $type_logement)
-						<option value="{{$type_logement->id}}">{{ $type_logement->name }}</option>
+							@if($type_logement->id === $annonce)
+								<option value="{{$type_logement->id}}" selected>{{ $type_logement->name }}</option>
+							@else
+								<option value="{{$type_logement->id}}">{{ $type_logement->name }}</option>
+							@endif						
 						@endforeach
 					</select>
 					<!-- <p class="help-block">Example block-level help text here.</p> -->

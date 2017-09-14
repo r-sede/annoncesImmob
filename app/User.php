@@ -18,6 +18,9 @@ class User extends Authenticatable
         'name', 'email', 'password',
     ];
 
+
+
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -31,4 +34,20 @@ class User extends Authenticatable
         $messages = Message::where('fk_user', $this->id)->where('read',false)->get();
         return count($messages) === 0 ? '': count($messages);
     }
+
+    public function mesMessages() {
+        $messages = Message::where('fk_user', $this->id)->orderBy('created_at', 'desc')->get();
+        foreach ( $messages as $message ) {
+            $message->read=true;
+            $message->save();
+        }
+        return view('inbox', ['messages' => $messages]);
+    }
+
+    public function mesAnnonces() {
+        $annonces = Annonce::where('fk_auteur', $this->id)->orderBy('created_at', 'desc')->get();
+        return view('index', ['annonces' => $annonces, 'mesAnnonces' => true ]);
+    }    
+
+
 }

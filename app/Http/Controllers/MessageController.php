@@ -24,12 +24,13 @@ class MessageController extends Controller
 	}
 
 	public function mesMessages() {
-		$messages = Message::where('fk_user', Auth::id())->orderBy('created_at', 'desc')->get();
-		foreach ($messages as $message ) {
-			$message->read=true;
-			$message->save();
-		}
-		return view('inbox', ['messages' => $messages]);
+		// $messages = Message::where('fk_user', Auth::id())->orderBy('created_at', 'desc')->get();
+		// foreach ($messages as $message ) {
+		// 	$message->read=true;
+		// 	$message->save();
+		// }
+		// return view('inbox', ['messages' => $messages]);
+		return Auth::user()->mesMessages();
 	}
 
 	/**

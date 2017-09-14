@@ -19,13 +19,12 @@
 					<div style=" width:300px; height: 300px; background-position: bottom; background-image:url(storage/imageAnnonce/{{ $annonce->logement->photo }})"></div>
 				</div>
 				<p >{{ $annonce->logement->description }}</p>
-				<!-- <p >{{ $annonce->auteur }}</p> -->
-				<!-- <img class="responsive" src='storage/imageAnnonce/{{ $annonce->logement->photo }}' > -->
-				<a class="btn btn-default" href="contactAuthor/{{ $annonce->fk_auteur }}">contact</a>
-<!-- 				<form method="POST" action="contactAuthor/{{ $annonce->fk_auteur }}">
-					{{ csrf_field() }}
-					<button type="submit" class="btn btn-default">contacter</button>
-				</form> -->
+				@if(isset($mesAnnonces))
+					<a class="btn btn-default" href="{{ route('annonces.edit', $annonce) }}">Editer</a>
+				@else
+					<a class="btn btn-default" href="contactAuthor/{{ $annonce->fk_auteur }}">contact</a>
+				@endif
+
 			</div>
 		</div>
 	</div>

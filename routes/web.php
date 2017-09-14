@@ -11,16 +11,20 @@
 |
 */
 
-Route::get('/','AnnonceController@index');
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::get('/','AnnonceController@index');
+
+Route::get('/mesMessages','MessageController@mesMessages')->name('mesMessages');
+Route::get('/mesAnnonces','AnnonceController@mesAnnonces')->name('mesAnnonces');
 
 Route::get('/contactAuthor/{id}', function($id) {
 	return view('contact', ['idAuthor' => $id]);
 });
-Route::get('/mesMessages','MessageController@mesMessages')->name('mesMessages');
+
+
+
 Route::resource('annonces', 'AnnonceController');
-
-
 Route::resource('messages', 'MessageController');
