@@ -26,4 +26,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function getNewMessage () {
+        $messages = Message::where('fk_user', $this->id)->where('read',false)->get();
+        return count($messages) === 0 ? '': count($messages);
+    }
 }

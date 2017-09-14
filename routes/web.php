@@ -16,6 +16,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/contactAuthor/{id}', function($id) {
+	return view('contact', ['idAuthor' => $id]);
+});
+Route::get('/mesMessages','MessageController@mesMessages')->name('mesMessages');
 Route::resource('annonces', 'AnnonceController');
 
 

@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Message;
 use Illuminate\Http\Request;
+use Auth;
 
 class MessageController extends Controller
 {
+
+
+	public function __construct() {
+		$this->middleware('auth', ['except' => ['store']]);
+	}
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -15,6 +21,15 @@ class MessageController extends Controller
 	public function index()
 	{
 		return response()->json( Message::All(), 200);   //
+	}
+
+	public function mesMessages() {
+		$messages = Message::where('fk_user', Auth::id())->orderBy('created_at', 'desc')->get();
+		foreach ($messages as $message ) {
+			$message->read=true;
+			$message->save();
+		}
+		return view('inbox', ['messages' => $messages]);
 	}
 
 	/**
@@ -40,7 +55,8 @@ class MessageController extends Controller
 		$message->email = $request->email;
 		$message->fk_user = $request->fk_user;
 		$message->save();
-		return response('ok', 201);
+		/*return response('ok', 201);*/
+		return redirect('/');
 
 	}
 

@@ -22,7 +22,7 @@ class TypeLogementTableSeeder extends Seeder
         	['name' => 'T4'],
         	['name' => 'garage/parking'],
         	['name' => 'terrain'],
-        	['name' => 'local_commercial'],
+        	['name' => 'local'],
         	['name' => 'autre'],
         ]);
     }

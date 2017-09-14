@@ -6,15 +6,11 @@ use App\Annonce;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Image;
 
 
 class AnnonceController extends Controller
 {
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
 
 	public function __construct() {
 		   
@@ -22,13 +18,17 @@ class AnnonceController extends Controller
 	}
 
 
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
 
 	public function index()
 	{
 		
-		
-
-		$res = Annonce::All();
+	
+		$res = Annonce::orderBy('created_at', 'desc')->get();
 		/*return response()->json( Annonce::All(), 200);*/
 		return view('all', [ 'annonces' => $res ]);
 	}
@@ -60,35 +60,40 @@ class AnnonceController extends Controller
 	public function store(Request $request)
 	{
 
-		//validate
-		$idLogement = DB::table('logements')->insertGetId([
-			'n_rue' => $request->n_rue,
-			'rue' => $request->rue,
-			'code_postal' => $request->code_postal,
-			'ville' => $request->ville,
-			'superficie' => $request->superficie,
-			'fk_type_logements' =>$request->type_logement,
-			'meuble' => $request->meuble === 'on',
-			'tarif' => $request->tarif,
-			'fk_modalite' => $request->modalite_acces,
-			'etage' => $request->etage,
-			'fk_type_parking' => $request->type_parking === 'non' ? null : $request->type_parking,
-			'n_chambre' => $request->n_chambre,
-			'description' => $request->description,
-			'photo' => $request->photo,
-			'classe_energie' => $request->classe_energie,
-			'classe_gesc' => $request->classe_gesc,
-		]);
-		//handle file
-		$annonce = new Annonce();
-		$annonce->fk_auteur = Auth::id();
-		$annonce->fk_logement = $idLogement;
+		if($request->hasFile('photo')){
+			$tof= $request->file('photo');
+    		$filename = time() . '.' . $tof->getClientOriginalExtension();
+    		Image::make($tof)->resize(200, 200)->save( public_path('/storage/imageAnnonce/' . $filename ) );			
+			//validate
+			$idLogement = DB::table('logements')->insertGetId([
+				'n_rue' => $request->n_rue,
+				'rue' => $request->rue,
+				'code_postal' => $request->code_postal,
+				'ville' => $request->ville,
+				'superficie' => $request->superficie,
+				'fk_type_logements' =>$request->type_logement,
+				'meuble' => $request->meuble === 'on',
+				'tarif' => $request->tarif,
+				'fk_modalite' => $request->modalite_acces,
+				'etage' => $request->etage,
+				'fk_type_parking' => $request->type_parking === 'non' ? null : $request->type_parking,
+				'n_chambre' => $request->n_chambre,
+				'description' => $request->description,
+				'photo' => $filename,
+				'classe_energie' => $request->classe_energie,
+				'classe_gesc' => $request->classe_gesc,
+			]);
+			//handle file
+			$annonce = new Annonce();
+			$annonce->fk_auteur = Auth::id();
+			$annonce->fk_logement = $idLogement;
 
-		$nn = time() + 8 * 24 * 3600;
-        $today = new \DateTime();
-        $today->setTimestamp($nn);
-        $annonce->expire_at = $today->format('Y-m-d H:i:s');
-		$annonce->save();
+			$nn = time() + 8 * 24 * 3600;
+	        $today = new \DateTime();
+	        $today->setTimestamp($nn);
+	        $annonce->expire_at = $today->format('Y-m-d H:i:s');
+			$annonce->save();
+		}
 		return redirect('/');
 
 
