@@ -18,4 +18,9 @@ class Logement extends Model
 
 	}
 
+	public function type_parking() {
+		return $this->belongsTo('App\Type_parking','fk_type_parking');
+
+	}
+
 }
