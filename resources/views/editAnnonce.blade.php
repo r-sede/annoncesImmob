@@ -3,11 +3,11 @@
 @section('content')
 
 <div class="container">
-	<form method="PUT" action="{{ route('annonces.update', $annonce) }}" enctype="multipart/form-data">
+	<form method="POST" action="{{ route('annonces.update', $annonce) }}" enctype="multipart/form-data">
 		
 		<div class="row">
 			<div class="col-xs-3">
-		
+		{{ method_field('PATCH') }}
 				<label>Adresse: </label>
 				<div class="form-group">
 					<label for="n_rue">n° rue</label>
@@ -161,11 +161,11 @@
 					<!-- <p class="help-block">Example block-level help text here.</p> -->
 				</div>
 
-				<div class="form-group">
+<!-- 				<div class="form-group">
 					<label for="photo">photo</label>
 					<input required type="file" name="photo" id="photo">
 					<p class="help-block">Example block-level help text here.</p>
-				</div>
+				</div> -->
 				 {{ csrf_field() }}
 			</div>
 		</div><!-- row -->

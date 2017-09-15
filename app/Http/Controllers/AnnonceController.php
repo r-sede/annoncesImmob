@@ -150,24 +150,26 @@ class AnnonceController extends Controller
 	 */
 	public function update(Request $request, Annonce $annonce)
 	{
-		return 'coucou';
 		
-/*		$annonce->logement->n_rue = $request->n_rue;
+		
+		$annonce->logement->n_rue = $request->n_rue;
 		$annonce->logement->rue = $request->rue;
 		$annonce->logement->code_postal = $request->code_postal;
 		$annonce->logement->ville = $request->ville;
 		$annonce->logement->superficie = $request->superficie;
-		$annonce->logement->fk_type_logements = $request->fk_type_logements;
-		$annonce->logement->meuble = $request->meuble;
-		$annonce->logement->fk_modalite = $request->fk_modalite;
+		$annonce->logement->fk_type_logements = $request->type_logement;
+		$annonce->logement->meuble = $request->meuble === 'on';
+		$annonce->logement->tarif = $request->tarif;
+		$annonce->logement->fk_modalite = $request->modalite_acces;
 		$annonce->logement->etage = $request->etage;
-		$annonce->logement->fk_type_parking = $request->fk_type_parking;
+		$annonce->logement->fk_type_parking = $request->type_parking === 'non' ? null : $request->type_parking;
 		$annonce->logement->n_chambre = $request->n_chambre;
 		$annonce->logement->description = $request->description;
 
 		$annonce->logement->classe_energie = $request->classe_energie;
 		$annonce->logement->classe_gesc = $request->classe_gesc;
-		$annonce->logement->save();*/
+		$annonce->logement->save();
+		$annonce->save();
 
 	}
 
