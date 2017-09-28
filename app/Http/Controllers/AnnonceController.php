@@ -112,7 +112,7 @@ class AnnonceController extends Controller
 	 */
 	public function show(Annonce $annonce)
 	{
-		return response($annonce, 200);
+		/*return response($annonce, 200);*/
 		//
 	}
 
@@ -127,7 +127,7 @@ class AnnonceController extends Controller
 		if($annonce->auteur['id'] != Auth::id()) {
 			return redirect('/');
 		}
-		$annonce->logement;
+		/*$annonce->logement;*/
 
 		$type_parking = DB::table('type_parking')->get();
 		$type_logement = DB::table('type_logement')->get();
@@ -138,7 +138,7 @@ class AnnonceController extends Controller
 			'types_parking' => $type_parking,
 			'types_logement' => $type_logement,
 			'modalites_acces' => $modalite_acces,
-		]); 
+		]);
 	}
 
 	/**
@@ -150,7 +150,27 @@ class AnnonceController extends Controller
 	 */
 	public function update(Request $request, Annonce $annonce)
 	{
-		//
+		
+		
+		$annonce->logement->n_rue = $request->n_rue;
+		$annonce->logement->rue = $request->rue;
+		$annonce->logement->code_postal = $request->code_postal;
+		$annonce->logement->ville = $request->ville;
+		$annonce->logement->superficie = $request->superficie;
+		$annonce->logement->fk_type_logements = $request->type_logement;
+		$annonce->logement->meuble = $request->meuble === 'on';
+		$annonce->logement->tarif = $request->tarif;
+		$annonce->logement->fk_modalite = $request->modalite_acces;
+		$annonce->logement->etage = $request->etage;
+		$annonce->logement->fk_type_parking = $request->type_parking === 'non' ? null : $request->type_parking;
+		$annonce->logement->n_chambre = $request->n_chambre;
+		$annonce->logement->description = $request->description;
+
+		$annonce->logement->classe_energie = $request->classe_energie;
+		$annonce->logement->classe_gesc = $request->classe_gesc;
+		$annonce->logement->save();
+		$annonce->save();
+
 	}
 
 	/**
