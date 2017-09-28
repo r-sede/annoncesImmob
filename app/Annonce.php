@@ -14,4 +14,5 @@ class Annonce extends Model
 	public function auteur() {
 		return $this->belongsTo('App\User', 'fk_auteur');
 	}
+
 }
